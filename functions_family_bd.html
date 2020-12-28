@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<title>துஜ - உறவினர் பிறந்தநாள்</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel = "icon" href = "dj_logo.png" type = "image/x-icon"> 
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+<script src="toast.js"></script>
+<link rel="stylesheet" href="toast.css">
+</head>
+<link rel="stylesheet" href="SendData.css">
+<link rel="stylesheet" href="SideBar.css">
+<script src="SideBar.js"></script>
+<script src="security.js"></script>
+<link rel="stylesheet" href="BdMd_DrobDown.css">
+</head>
+<style>
+#family_bd {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#family_bd td, #family_bd th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#family_bd tr:nth-child(even){background-color: #f2f2f2;}
+
+#family_bd tr:hover {background-color: #FF8A65;}
+
+#family_bd th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #FF3D00;
+  color: white;
+}
+</style>
+<body>
+</br></br></br>
+<!------------------MainContent--------------->
+<img src="fab_logo.png" width="70.5" height="77.5" style="position:fixed;bottom:25px;right:25px;" onclick="openPopup()">
+<table id="family_bd">
+  <tr>
+    <th><center>DATE</center></th>
+    <th><center>NAME</center></th>
+  </tr>
+</table>
+<!------------------------------------>
+<!------------------PopUp--------------->
+<div id="id01" class="modal"> 
+  <div class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <h class="avatar">குடும்பம்</h>
+    </div>
+    <div class="container">
+      <input type="date" name="date" style="color:#FF5722;background-color:white;" id="datevalue" required></br>
+      <label><b>பெயர்</b></label>
+      <input type="text" placeholder="பெயர்" name="name" style="color:#FF5722;" id="namevalue" required>
+      <label><b>துணைபெயர்</b></label>
+      <input type="text" placeholder="துணை பெயர்..." name="nickname" style="color:#FF5722;" id="nicknamevalue" required>
+    </div>
+    <div class="container" style="background-color:#f1f1f1">
+      <center><button type="submit" class="submitbtn" onclick="SendData()">அடுத்து</button></center>
+    </div>
+  </div>
+</div>
+<div id="toast"><div id="img"><img src="dj_logo.png" width="50" height="50"></div><div id="desc">வெற்றிகரமாகச் செயல்பட்டது!</div></div>
+<!-------------------------------->
+<!-------------------SideBar--------------->
+<div id="mySidenav" class="sidenav">
+  <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</b>
+   <center><a href="main.html?dj" style="color:red;border-bottom: 0px;background-color:yellow;"><b>முகப்பக்கம்</b></a></center></br>
+  <a class="dropdown-btn" onclick="changeArrow('arrow1')">விசேஷங்கள்<span class="arrowRight" id="arrow1">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a class="dropdown-btn" onclick="changeArrow('arrow1.1')">உறவினர்கள்<span class="arrowRight" id="arrow1.1">&raquo;</span></a>
+      <div class="dropdown-container">
+        <a href="functions_family_bd.html?dj">பிறந்தநாள்</a>
+        <a href="functions_family_md.html?dj">திருமணநாள்</a>
+      </div>
+    <a class="dropdown-btn" onclick="changeArrow('arrow1.2')">நண்பர்கள்<span class="arrowRight" id="arrow1.2">&raquo;</span></a>
+      <div class="dropdown-container">
+        <a href="functions_friends_bd.html?dj">பிறந்தநாள்</a>
+      </div>
+  </div>
+  <a class="dropdown-btn" onclick="changeArrow('arrow2')">தமிழ்<span class="arrowRight" id="arrow2">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a href="tamilanda_tamil.html?dj">தமிழ்</a>
+  </div>
+  <a class="dropdown-btn" onclick="changeArrow('arrow3')">தமிழன்<span class="arrowRight" id="arrow3">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a href="tamilanda_tamilan_aann.html?dj">ஆண்</a>
+    <a href="tamilanda_tamilan_penn.html?dj">பெண்</a>
+  </div>
+</div>
+<span style="font-size:30px;cursor:pointer;position:absolute;top:5px;left:10px;color:red;" onclick="openNav()">&#9776</span>
+<!----------------------------->
+<!------------------BdMd_DrobDown.css------->
+<bm class="Bd_or_Md">
+    <a href="javascript:void(0)" class="Bd_or_Md-Btn">பிறந்தநாள்</a>
+    <div class="Bd_or_Md-content">
+      <a href="functions_family_md.html?dj">திருமணநாள்</a>
+    </div>
+</bm>
+<!------------------------------->
+</body>
+<script>
+security();
+//--------------------------FireBase---------------
+      var config = {
+        apiKey: "AIzaSyAB_Q9APAALhTFv3djz9cMxft5uft2LwCM",
+        authDomain: "duja-55555.firebaseapp.com",
+    databaseURL: "https://duja-55555-default-rtdb.firebaseio.com",
+    projectId: "duja-55555",
+    storageBucket: "duja-55555.appspot.com",
+    messagingSenderId: "203703988385",
+    appId: "1:203703988385:web:1774dba54125cae6b980e0",
+    measurementId: "G-EVFS9WQZ9F"
+      };
+      firebase.initializeApp(config);
+       firebase.analytics();
+//--------------------------------------------
+//---------------------GetData-----------
+      firebase.database().ref().child('DJ/Functions/Family/Birthday').once('value').then(function(snapshot){
+          if(snapshot.exists()){
+              var content = '';
+              snapshot.forEach(function(data){
+                  var Date = data.val().Date;
+                  var Name = data.val().Name;
+                  content += '<tr>';
+                  content += '<td>' + Date + '</td>'
+                  content += '<td>' + Name + '</td>';
+                  content += '</tr>';
+      });
+        document.getElementById("family_bd").innerHTML += content
+    }
+    });
+//--------------------------------------------
+var modal1 = document.getElementById('id01');
+window.onclick = function(event) {
+    if (event.target == modal1) {
+        modal1.style.display = "none";
+    }
+}
+function openPopup() {
+	document.getElementById('id01').style.display='block'
+}
+function TodayDate() {	
+	var d = new Date();
+	var CurrentDate = (d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+"."+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"."+d.getFullYear().toString();
+	var CurrentTime = d.getHours()+"."+d.getMinutes()+"."+d.getSeconds()+"."+d.getMilliseconds();
+	var DateAdded = CurrentDate+"_"+CurrentTime;
+	return DateAdded;
+}
+function DateValue() {
+  var d = new Date(document.getElementById("datevalue").value);
+  var dd = d.getDate();
+  var mm = d.getMonth();mm++;
+  var yyyy = d.getFullYear();
+  var DateValue=dd + "." + mm + "." + yyyy;
+  return DateValue;
+}
+function SendData() {
+	var name = document.getElementById("namevalue").value;
+	var nickname = document.getElementById("nicknamevalue").value;
+	var date = document.getElementById("datevalue").value;
+	date=DateValue();
+	var todaydate = TodayDate();
+	firebase.database().ref("DJ/Functions/Family/Birthday/"+nickname).set({
+		Name: name,
+		Date: date,
+		NickName: nickname,
+		DateAdded: todaydate,
+	});
+	launch_toast();
+	setTimeout(function(){location.reload();}, 5000);
+}
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>
+</html>

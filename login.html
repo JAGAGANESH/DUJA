@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<title>துஜ - Login</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+</head>
+<style>
+.rectangle1 {
+  height: 400px;
+  width: 95%;
+  background-color: #FF5722;
+  position: absolute;
+  top: 90px;
+  left: 8px;
+  z-index: -1;
+}
+.rectangle2 {
+  height: 280px;
+  width: 85%;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: 170px;
+  left: 25px;
+  z-index: -1;
+}
+input[type=text], select {
+  width: 90%;
+  height: 50px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+div1 {
+	position:absolute;
+	top:200px;
+	left:30px;
+}
+.rotate {
+  animation: rotation 2s infinite linear;
+  display:none;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+</style>
+<body>
+<div class="rectangle1"></div>
+<div class="rectangle2"></div>
+<img src="button_logo.png" width="200" height="75" style="position:absolute;top:350px;left:77px;" onclick="signIn();">
+<p style="position:absolute;top:355px;left:125px;font-size:20px;color:white;" onclick="signIn();">உள்நுழை</p>
+<p style="position:absolute;top:40px;left:125px;font-size:50px;color:white;">துஜ</p>
+<div1>
+ <input type="text" id="email" name="email" placeholder="Mail ID...">
+  <input type="text" id="psw" name="psw" placeholder="Password...">
+  </div1>
+  <img src="round_logo.png" width="160" height="160" style="position:absolute;top:50px;left:97px;" class="rotate" id="img0">
+</body>
+<script>
+var config = {
+        apiKey: "AIzaSyAB_Q9APAALhTFv3djz9cMxft5uft2LwCM",
+        authDomain: "duja-55555.firebaseapp.com",
+    databaseURL: "https://duja-55555-default-rtdb.firebaseio.com",
+    projectId: "duja-55555",
+    storageBucket: "duja-55555.appspot.com",
+    messagingSenderId: "203703988385",
+    appId: "1:203703988385:web:1774dba54125cae6b980e0",
+    measurementId: "G-EVFS9WQZ9F"
+      };
+      firebase.initializeApp(config);
+       firebase.analytics();
+function signIn(){
+	hide("block");
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("psw").value;
+    firebase.auth().signInWithEmailAndPassword(email, password).then((success) => {
+	window.location.replace("main.html?dj");
+        }).catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            hide("none");
+	    alert(errorMessage);
+            });
+}
+function hide(value) {
+var hideimg = document.getElementById("img0");
+hideimg.style.display = value;
+}
+</script>
+</html>

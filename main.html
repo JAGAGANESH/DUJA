@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<title>துஜ</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel = "icon" href = "dj_logo.png" type = "image/x-icon"> 
+</head>
+<link rel="stylesheet" href="SideBar.css">
+<script src="SideBar.js"></script>
+<script src="security.js"></script>
+<style>
+.rotate {
+  animation: rotation 1s infinite linear;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+</style>
+<body>
+<a href="functions.html?dj">
+<img src="round_logo.png" width="160" height="160" style="position:absolute;top:75px;left:103px;" id="r_img1" onclick="rotation(id)">
+<img src="functions_logo.png" width="127.08333333" height="30.833333333" style="position:absolute;top:140px;left:118px;" onclick="rotation('r_img1')">
+</a>
+<a href="tamilanda_tamil.html?dj">
+<img src="round_logo.png" width="160" height="160" style="position:absolute;top:245px;left:103px;" id="r_img2" onclick="rotation(id)">
+<img src="tamil_logo.png" width="128.5" height="64.5" style="position:absolute;top:290px;left:120px;" onclick="rotation('r_img2')">
+</a>
+<a href="tamilan.html?dj">
+<img src="round_logo.png" width="160" height="160" style="position:absolute;top:415px;left:103px;" id="r_img3" onclick="rotation(id)">
+<img src="tamilan_logo.png" width="121.5" height="37" style="position:absolute;top:477px;left:123px;" onclick="rotation('r_img3')">
+</a>
+<!-------------------SideNav------------------->
+<div id="mySidenav" class="sidenav">
+  <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</b>
+   <center><a href="main.html?dj" style="color:red;border-bottom: 0px;background-color:yellow;"><b>முகப்பக்கம்</b></a></center></br>
+  <a class="dropdown-btn" onclick="changeArrow('arrow1')">விசேஷங்கள்<span class="arrowRight" id="arrow1">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a class="dropdown-btn" onclick="changeArrow('arrow1.1')">உறவினர்கள்<span class="arrowRight" id="arrow1.1">&raquo;</span></a>
+      <div class="dropdown-container">
+        <a href="functions_family_bd.html?dj">பிறந்தநாள்</a>
+        <a href="functions_family_md.html?dj">திருமணநாள்</a>
+      </div>
+    <a class="dropdown-btn" onclick="changeArrow('arrow1.2')">நண்பர்கள்<span class="arrowRight" id="arrow1.2">&raquo;</span></a>
+      <div class="dropdown-container">
+        <a href="functions_friends_bd.html?dj">பிறந்தநாள்</a>
+      </div>
+  </div>
+  <a class="dropdown-btn" onclick="changeArrow('arrow2')">தமிழ்<span class="arrowRight" id="arrow2">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a href="tamilanda_tamil.html?dj">தமிழ்</a>
+  </div>
+  <a class="dropdown-btn" onclick="changeArrow('arrow3')">தமிழன்<span class="arrowRight" id="arrow3">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a href="tamilanda_tamilan_aann.html?dj">ஆண்</a>
+    <a href="tamilanda_tamilan_penn.html?dj">பெண்</a>
+  </div>
+</div>
+<span style="font-size:30px;cursor:pointer;position:absolute;top:5px;left:10px;color:red;" onclick="openNav()">&#9776</span>
+<!---------------------------------->
+</body>
+<script>
+security();
+function rotation(value) {
+	var img=document.getElementById(value);
+	img.classList.toggle("rotate");
+}
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>
+</html>

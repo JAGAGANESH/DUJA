@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<link rel="stylesheet" href="SideBar.css">
+<script src="SideBar.js"></script>
+<body>
+<div id="mySidenav" class="sidenav">
+  <b href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</b>
+  <a class="dropdown-btn" onclick="changeArrow('arrow1')">விசேஷங்கள்<span class="arrowRight" id="arrow1">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a class="dropdown-btn" onclick="changeArrow('arrow1.1')">உறவினர்கள்<span class="arrowRight" id="arrow1.1">&raquo;</span></a>
+      <div class="dropdown-container">
+        <a href="functions_family_bd.html">பிறந்தநாள்</a>
+        <a href="functions_family_md.html">திருமணநாள்</a>
+      </div>
+    <a class="dropdown-btn" onclick="changeArrow('arrow1.2')">நண்பர்கள்<span class="arrowRight" id="arrow1.2">&raquo;</span></a>
+      <div class="dropdown-container">
+        <a href="functions_friends_bd.html">பிறந்தநாள்</a>
+      </div>
+  </div>
+  <a class="dropdown-btn" onclick="changeArrow('arrow2')">தமிழ்<span class="arrowRight" id="arrow2">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a href="tamilanda_tamil.html">தமிழ்</a>
+  </div>
+  <a class="dropdown-btn" onclick="changeArrow('arrow3')">தமிழன்<span class="arrowRight" id="arrow3">&raquo;</span></a>
+  <div class="dropdown-container">
+    <a href="tamilanda_tamilan_aann.html">ஆண்</a>
+    <a href="tamilanda_tamilan_penn.html">பெண்</a>
+  </div>
+</div>
+<span style="font-size:30px;cursor:pointer;position:absolute;top:5px;left:10px;color:red;" onclick="openNav()">&#9776</span>
+<script>
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+</script>
+</body>
+</html> 
